@@ -1,0 +1,38 @@
+.draw {
+    border-style: solid;
+    border-width: 1px;
+    background-color: white;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.canvas-container {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background-color: #CCCFFF;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-height: 800px){
+    .canvas-container {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        background-color: #CCCFFF;
+        height: 40vh;
+    }
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

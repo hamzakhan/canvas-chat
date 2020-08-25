@@ -1,0 +1,16 @@
+.canvas-message-container{
+    text-align: center;
+    height: 70vh;
+}
+
+@media (max-height: 800px) {
+    .canvas-message-container{
+        text-align: center;
+        height: 60vh;
+        overflow: auto;
+    }
+}
+
+.canvas-message-inner-container {
+    margin-bottom: 5px;
+}

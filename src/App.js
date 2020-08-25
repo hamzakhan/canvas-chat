@@ -1,24 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+//import socketIOClient from 'socket.io-client';
+import ChatApp from './containers/ChatApp/ChatApp'
+import Login from './components/Login/Login'
+import Register from './components/Login/Register'
+
+//const URL  = "http://localhost:4000"
 
 function App() {
+  const [route, setRoute] = useState('login');
+
+  useEffect(() => {
+    fetch('http://localhost:4000/')
+    .then(response => response.json())
+    .then(console.log)
+  }, [])
+
+  const onRouteChange = (route) => {
+    setRoute(route);
+  }
+
+  const renderswitch = (route) => {
+    switch(route){
+      case 'chat':
+        return <ChatApp/>
+      case 'login':
+      case 'logout':
+        return <Login onRouteChange={onRouteChange}/>
+      case 'register':
+        return <Register onRouteChange={onRouteChange}/>
+      default:
+        return;
+    }
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {renderswitch(route)}
     </div>
   );
 }
