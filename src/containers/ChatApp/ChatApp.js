@@ -3,11 +3,8 @@ import Canvas from '../../components/Canvas/Canvas';
 import CanvasMessages from '../../components/CanvasMessages/CanvasMessages';
 import {socket} from '../../service/socket';
 
-const ChatApp = () => {
+const ChatApp = ({user}) => {
     
-
-    //const [name, setName] = useState('');
-    //const [room, setRoom] = useState('');
     const [drawings, setDrawings] = useState([]);
 
     useEffect(() => {
@@ -19,7 +16,7 @@ const ChatApp = () => {
     return(
         <React.Fragment>
             <CanvasMessages drawings={drawings}/>
-            <Canvas socket={socket} name="Test"/>
+            <Canvas socket={socket} name={user}/>
         </React.Fragment>
     );
 }

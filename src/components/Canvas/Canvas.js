@@ -99,7 +99,6 @@ const Canvas = ({socket, name}) => {
     const sendImage = () => {
         sessionStorage.setItem('canvas', canvas.current.toDataURL());
         var dataURL = sessionStorage.getItem('canvas');
-        console.log(dataURL);
         socket.emit('imageSubmit', {
             image: dataURL,
             user: name

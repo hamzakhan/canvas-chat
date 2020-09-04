@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button'
 
 import './Login.css';
 
-const Register = ({onRouteChange}) => {
+const Register = ({onRouteChange, loadUser}) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [pwConfirm, setPwConfirm] = useState('');
@@ -24,11 +24,29 @@ const Register = ({onRouteChange}) => {
         if (!(username.length > 0)){
             console.log('Please enter a username');
         }
-        if (!(password.length > 0)){
+        else if (!(password.length > 0)){
             console.log('Please enter a password');
         }
-        if (password !== pwConfirm){
+        else if (password !== pwConfirm){
             console.log ('Passwords don\'t match');
+        } else {
+            fetch('http://localhost:4000/register', {
+                method: 'post',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            })
+            .then (response => response.json())
+            .then (user => {
+                if (user.length){
+                    loadUser(user);
+                    onRouteChange('chat');
+                } else {
+                    console.log('Could not register.');
+                }
+            })
         }
     }
 
@@ -47,6 +65,7 @@ const Register = ({onRouteChange}) => {
                 variant="standard"
                 placeholder="Password"
                 margin="normal"
+                type="password"
                 onChange={onPasswordChange}
                 />
 
@@ -54,6 +73,7 @@ const Register = ({onRouteChange}) => {
                 variant="standard"
                 placeholder="Confirm Password"
                 margin="normal"
+                type="password"
                 onChange={onPasswordConfirmChange}
                 />
 

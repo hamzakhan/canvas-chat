@@ -8,6 +8,7 @@ import Register from './components/Login/Register'
 //const URL  = "http://localhost:4000"
 
 function App() {
+  const [user, setUser] = useState('');
   const [route, setRoute] = useState('login');
 
   useEffect(() => {
@@ -16,6 +17,10 @@ function App() {
     .then(console.log)
   }, [])
 
+  const loadUser = (user) => {
+    setUser(user);
+  }
+
   const onRouteChange = (route) => {
     setRoute(route);
   }
@@ -23,12 +28,12 @@ function App() {
   const renderswitch = (route) => {
     switch(route){
       case 'chat':
-        return <ChatApp/>
+        return <ChatApp user={user}/>
       case 'login':
       case 'logout':
         return <Login onRouteChange={onRouteChange}/>
       case 'register':
-        return <Register onRouteChange={onRouteChange}/>
+        return <Register onRouteChange={onRouteChange} loadUser={loadUser}/>
       default:
         return;
     }
